@@ -1,6 +1,6 @@
-ackage com.sata.izonovel.Model;
+package com.sata.izonovel.Model;
 
-public class FavoriteRequestSearchModel {
+public class Favorite {
     public String getCollection() {
         return collection;
     }

@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sata.izonovel.Database.DatabaseClient;
+import com.sata.izonovel.Database.model.Session;
 import com.sata.izonovel.Model.LoginRequestModel;
 import com.sata.izonovel.Model.LoginResponseModel;
 import com.sata.izonovel.Retrofit.APIService;
@@ -65,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 //kondisi jika berhasil login
                 if(response.body().getDocument() != null){
+                    onSaveSission(response.body().getDocument());
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -78,6 +82,26 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 // kondisi jika gagal login ketika hit api
                 Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void onSaveSission(LoginResponseModel.Document document){
+        Session session = new Session();
+        session.setUserID(document.get_id());
+        session.setName(document.getUsername());
+        session.setFullName(document.getFullName());
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseClient.getInstance(LoginActivity.this).getAppDatabase()
+                                .dataBaseAction().clearSessionList();
+
+                DatabaseClient.getInstance(LoginActivity.this).getAppDatabase()
+                        .dataBaseAction()
+                        .insertSessions(session);
             }
         });
 

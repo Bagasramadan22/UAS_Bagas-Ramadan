@@ -21,13 +21,35 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/bg"/>
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-100dp"
+                android:layout_marginTop="-120dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+
+
+                <Button
+                    android:id="@+id/btn_sign_out"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SIGN OUT"/>
+
+                <Button
+                    android:id="@+id/btn_signin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SIGN IN"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +87,7 @@
                             android:id="@+id/daftar_novel"
                             android:textColor="@color/text_header"
                             android:layout_width="match_parent"
-                            android:text="Daftr Novel"
+                            android:text="Daftar Novel"
                             android:textSize="16dp"
                             android:textStyle="bold"
                             android:layout_height="wrap_content"/>
